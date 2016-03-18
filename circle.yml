@@ -1,7 +1,6 @@
 machine:
   environment:
     GIT_TAG: build-$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
-    GITHUB_API: https://github.trendmicro.com/api/v3/
 
 dependencies:
   post:
