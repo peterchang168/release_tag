@@ -4,8 +4,7 @@ machine:
 
 dependencies:
   post:
-    - go get -d github.com/tcnksm/ghr
-    - go install github.com/tcnksm/ghr
+    - go get github.com/aktau/github-release
 test:
   override:
     - mkdir dist
@@ -17,5 +16,6 @@ deployment:
   release:
     branch: master
     commands:
-      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace v1.0.0 dist/test
-
+      #- github-release upload  --user $CIRCLE_PROJECT_USERNAME      --repo $CIRCLE_PROJECT_REPONAME     --tag v0.1.0     --name "gofinance-osx-amd64"     --file dist/test
+      - github-release release --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag v0.1.0 --name "test" --description "first release!" --pre-release
+      - github-release --verbose upload --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag v0.1.0 --name "test" --file dist/test
