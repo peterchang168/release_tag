@@ -10,7 +10,9 @@ dependencies:
 test:
   override:
     - mkdir dist
-    - echo 'success' > dist/test 
+    - echo 'success' > dist/test
+    - echo $CIRCLE_PROJECT_USERNAME
+    - echo $CIRCLE_PROJECT_REPONAME 
 
 deployment:
   release:
