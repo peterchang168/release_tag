@@ -1,0 +1,20 @@
+machine:
+  environment:
+    GIT_TAG: build-$CIRCLE_BRANCH-$CIRCLE_BUILD_NUM
+    GITHUB_API: https://github.trendmicro.com/api/v3/
+
+dependencies:
+  post:
+    - go get -d github.com/tcnksm/ghr
+    - go install github.com/tcnksm/ghr
+test:
+  override:
+    - mkdir dist
+    - echo 'success' > dist/test 
+
+deployment:
+  release:
+    branch: master
+    commands:
+      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace v1.0.0 dist/test
+
